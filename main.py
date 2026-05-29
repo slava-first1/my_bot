@@ -34,7 +34,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data["total_protein"] = 0
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text="Привет. Напиши /Knb - чтобы поиграть в камень ножницы бумага , /Talk - чтобы поговорить или /Gadalka чтобы погадать и еще /Haval и еще /Total , /New_day ",
+        text="Привет. Напиши:\n/Knb - чтобы поиграть в камень ножницы бумага , /Talk - чтобы поговорить или /Gadalka чтобы погадать и еще /Haval и еще /Total , /New_day ",
         reply_markup=markup,
     )
     return MAINMENU
