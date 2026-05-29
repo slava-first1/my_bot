@@ -53,14 +53,9 @@ async def gadalka(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     elif 'почему' in text:
         bot_var = random.choice(why)
-      
-        await context.bot.send_message(
-            chat_id=update.effective_chat.id, text=f"{bot_var}"
-      )
     
-
     else:
         bot_var = random.choice(yesno)
-        await context.bot.send_message(
-            chat_id=update.effective_chat.id, text=f"{bot_var},"
-        )
+    await context.bot.send_message(
+        chat_id=update.effective_chat.id, text=f"{bot_var}"
+    )

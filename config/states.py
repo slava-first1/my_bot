@@ -1,1 +1,1 @@
-MAINMENU, TALK, KNB, GADAL = range(4)
+MAINMENU, TALK, KNB, GADAL , HAVAL , = range(5)
