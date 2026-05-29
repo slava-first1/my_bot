@@ -1,0 +1,1 @@
+MAINMENU, TALK, KNB, GADAL = range(4)
