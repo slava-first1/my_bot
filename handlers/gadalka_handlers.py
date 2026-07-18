@@ -1,17 +1,21 @@
 
 import random
-from telegram import Update 
+from telegram import Update,InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     ContextTypes,
     
 )
 from config.states import GADAL
+from handlers.start_handler import start
 async def gadalka_star(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text="привет, я гадалка, задай любой вопрос",
+    query = update.callback_query
+    if query:
+        await query.answer()
+    keyboard = [[InlineKeyboardButton("Назад", callback_data="back_3", api_kwargs={'style':'danger'})]]
+    markup = InlineKeyboardMarkup(keyboard)
+    await query.edit_message_text("привет, я гадалка, задай любой вопрос", reply_markup=markup)
         
-    )
+    
     return GADAL
 
 
@@ -59,3 +63,4 @@ async def gadalka(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(
         chat_id=update.effective_chat.id, text=f"{bot_var}"
     )
+    return await start(update, context)

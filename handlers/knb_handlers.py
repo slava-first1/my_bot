@@ -1,5 +1,5 @@
 import random
-from telegram import Update,ReplyKeyboardMarkup
+from telegram import Update,ReplyKeyboardMarkup,InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     ContextTypes,
 )
@@ -8,11 +8,14 @@ from config.states import KNB
 async def knb_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [['бумага'], ['ножницы'],['камень']]
     markup = ReplyKeyboardMarkup(keyboard)
-    await context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text="Ты попал в игру. Напиши камень, ножницы или бумага",
-        reply_markup=markup
-    )
+    query = update.callback_query
+    if query:
+        await query.answer()
+    keyboard = [[InlineKeyboardButton("Назад", callback_data="back_2", api_kwargs={'style':'danger'})]]
+    markup = InlineKeyboardMarkup(keyboard)
+    await query.edit_message_text("Ты попал в игру. Напиши камень, ножницы или бумага", reply_markup=markup)
+
+
     return KNB
 
 

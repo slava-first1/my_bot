@@ -1,4 +1,9 @@
-from telegram import Update
+from telegram import (
+    Update,
+    # ReplyKeyboardMarkup,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+)
 from telegram.ext import (
     ContextTypes,
 )
@@ -7,10 +12,12 @@ from config.states import TALK
 
 
 async def talk_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text="привет, как у тебя дела?",
-    )
+    query = update.callback_query
+    if query:
+        await query.answer()
+        keyboard = [[InlineKeyboardButton("Назад", callback_data="back", api_kwargs={'style':'danger'})]]
+        markup = InlineKeyboardMarkup(keyboard)
+    await query.edit_message_text("ПРИВЕТ! как у тебя дела ?", reply_markup=markup)
 
     context.user_data["prev_mess"] = []
 
